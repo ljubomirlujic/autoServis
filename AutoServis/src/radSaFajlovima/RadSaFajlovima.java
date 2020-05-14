@@ -31,8 +31,9 @@ public class RadSaFajlovima {
 	private ArrayList<Serviseri> serviseri;
 	private ArrayList<Automobili> automobili;
 	private ArrayList<Delovi> delovi;
-	private ArrayList<Servisi> servisi;
 	private ArrayList<ServisneKnjizice> servisneKnjizice;
+	private ArrayList<Servisi> servisi;
+	
 
 //---------------------------Konstruktor----------------------------------//
 	public RadSaFajlovima() {
@@ -41,8 +42,9 @@ public class RadSaFajlovima {
 		serviseri = new ArrayList<Serviseri>();
 		automobili = new ArrayList<Automobili>();
 		delovi = new ArrayList<Delovi>();
-		servisi = new ArrayList<Servisi>();
 		servisneKnjizice = new ArrayList<ServisneKnjizice>();
+		servisi = new ArrayList<Servisi>();
+		
 		}
 //---------------------------Pomocne metode----------------------------------//
 	public  Musterije odrediVlasnika(String vlasnik) {
@@ -71,11 +73,15 @@ public class RadSaFajlovima {
 		return null;
 	}
 	public Servisi nadjiServis(String id) {
+		ucitajServise();
 		for (Servisi servis : servisi) {
 			if(servis.getId() == Integer.parseInt(id)) {
+				servisi.clear();
 				return servis;
+				
 			}
 		}
+		
 		return null;
 	}
 	public Delovi nadjiDeo(String id) {
@@ -87,7 +93,6 @@ public class RadSaFajlovima {
 		return null;
 	}
 	public Automobili nadjiAutoPrekoKnjizice(String id) {
-		ucitajServisneKnjizice();
 		for (ServisneKnjizice knjiga : servisneKnjizice) {
 			if(knjiga.getAutomobil().getId() == Integer.parseInt(id)) {
 				return knjiga.getAutomobil();
