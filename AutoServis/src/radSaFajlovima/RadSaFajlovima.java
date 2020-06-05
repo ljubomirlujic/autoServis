@@ -91,6 +91,7 @@ public class RadSaFajlovima {
 		}
 		this.musterije.remove(musterija);
 	}
+	
 	public void izmeniMusteriju(int id, String ime, String prezime, String jmbg, Pol pol, String adresa, String brojTelefona,
 			String korisnickoIme, String lozinka, int nagradniBodovi,boolean obrisan) { // izmjena	
 		for(Musterije m: musterije) {
