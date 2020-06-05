@@ -17,6 +17,7 @@ public class Automobili {
 	private double zapreminaMotora;
 	private int snagaMotora;
 	private VrstaGoriva vrstaGoriva;
+	private boolean obrisan;
 	
 	public Automobili() {
 		this.id = 0;
@@ -26,11 +27,14 @@ public class Automobili {
 		this.godinaProizvodnje = new GregorianCalendar();
 		this.zapreminaMotora = 0;
 		this.snagaMotora = 0;
-		this.vrstaGoriva = null;
+		this.vrstaGoriva = VrstaGoriva.BENZIN;
+		this.obrisan = false;
 	}
 
+
 	public Automobili(int id, Musterije vlasnik, MarkaAutomobila marka, ModelAutomobila model,
-			GregorianCalendar godinaProizvodnje, double zapreminaMotora, int snagaMotora, VrstaGoriva vrstaGoriva) {
+			GregorianCalendar godinaProizvodnje, double zapreminaMotora, int snagaMotora, VrstaGoriva vrstaGoriva,
+			boolean obrisan) {
 		super();
 		this.id = id;
 		this.vlasnik = vlasnik;
@@ -40,7 +44,10 @@ public class Automobili {
 		this.zapreminaMotora = zapreminaMotora;
 		this.snagaMotora = snagaMotora;
 		this.vrstaGoriva = vrstaGoriva;
+		this.obrisan = obrisan;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -107,11 +114,24 @@ public class Automobili {
 	}
 	
 
+	public boolean isObrisan() {
+		return obrisan;
+	}
+
+
+	public void setObrisan(boolean obrisan) {
+		this.obrisan = obrisan;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Automobil [id=" + id + ", vlasnik=" + vlasnik + ", marka=" + marka + ", model=" + model
-				+ ", godinaProizvodnje=" + RadSaDatumima.datumUString(godinaProizvodnje)  + ", zapreminaMotora=" + zapreminaMotora + ", snagaMotora="
-				+ snagaMotora + ", vrstaGoriva=" + vrstaGoriva + "]";
+				+ ", godinaProizvodnje=" + RadSaDatumima.datumUString(godinaProizvodnje) + ", zapreminaMotora=" + zapreminaMotora + ", snagaMotora="
+				+ snagaMotora + ", vrstaGoriva=" + vrstaGoriva + ", obrisan=" + obrisan + "]";
 	}
+
+
+	
 	
 }

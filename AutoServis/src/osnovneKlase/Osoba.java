@@ -10,6 +10,7 @@ public abstract class Osoba {
 	protected Pol pol;
 	protected String adresa;
 	protected String brojTelefona;
+	protected boolean obrisan;  
 	
 	public Osoba() {
 		this.id = 0;
@@ -19,10 +20,12 @@ public abstract class Osoba {
 		this.pol = Pol.MUSKI;
 		this.adresa = "";
 		this.brojTelefona = "";
+		this.obrisan = false;
 	}
 
 
-	public Osoba(int id, String ime, String prezime, String jmbg, Pol pol, String adresa, String brojTelefona) {
+	public Osoba(int id, String ime, String prezime, String jmbg, Pol pol, String adresa, String brojTelefona,
+			boolean obrisan) {
 		super();
 		this.id = id;
 		this.ime = ime;
@@ -31,6 +34,7 @@ public abstract class Osoba {
 		this.pol = pol;
 		this.adresa = adresa;
 		this.brojTelefona = brojTelefona;
+		this.obrisan = obrisan;
 	}
 
 
@@ -93,12 +97,23 @@ public abstract class Osoba {
 	public void setBrojTelefona(String brojTelefona) {
 		this.brojTelefona = brojTelefona;
 	}
+	
+	public boolean isObrisan() {
+		return obrisan;
+	}
+
+
+	public void setObrisan(boolean obrisan) {
+		this.obrisan = obrisan;
+	}
+
 
 	@Override
 	public String toString() {
 		return "Osoba [id=" + id + ", ime=" + ime + ", prezime=" + prezime + ", jmbg=" + jmbg + ", pol=" + pol
-				+ ", adresa=" + adresa + ", brojTelefona=" + brojTelefona + "]";
+				+ ", adresa=" + adresa + ", brojTelefona=" + brojTelefona + ", obrisan=" + obrisan + "]";
 	}
+
 	
 	
 	

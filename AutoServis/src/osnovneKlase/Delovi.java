@@ -9,6 +9,7 @@ public class Delovi {
 	private double cena;
 	private MarkaAutomobila markaAutomobila;
 	private ModelAutomobila modelAutomobila;
+	private boolean obrisan;
 	
 	public Delovi() {
 		this.id = 0;
@@ -16,16 +17,21 @@ public class Delovi {
 		this.cena = 0;
 		this.markaAutomobila = MarkaAutomobila.BMW;
 		this.modelAutomobila = ModelAutomobila.BMW_320D;
+		this.obrisan = false;
 	}
 
-	public Delovi(int id, String naziv, double cena, MarkaAutomobila markaAutomobila, ModelAutomobila modelAutomobila) {
+	public Delovi(int id, String naziv, double cena, MarkaAutomobila markaAutomobila, ModelAutomobila modelAutomobila,
+			boolean obrisan) {
 		super();
 		this.id = id;
 		this.naziv = naziv;
 		this.cena = cena;
 		this.markaAutomobila = markaAutomobila;
 		this.modelAutomobila = modelAutomobila;
+		this.obrisan = obrisan;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -66,11 +72,22 @@ public class Delovi {
 	public void setModelAutomobila(ModelAutomobila modelAutomobila) {
 		this.modelAutomobila = modelAutomobila;
 	}
+	
+
+	public boolean isObrisan() {
+		return obrisan;
+	}
+
+	public void setObrisan(boolean obrisan) {
+		this.obrisan = obrisan;
+	}
 
 	@Override
 	public String toString() {
 		return "Deo [id=" + id + ", naziv=" + naziv + ", cena=" + cena + ", markaAutomobila=" + markaAutomobila
-				+ ", modelAutomobila=" + modelAutomobila + "]";
+				+ ", modelAutomobila=" + modelAutomobila + ", obrisan=" + obrisan + "]";
 	}
+
+	
 	
 }

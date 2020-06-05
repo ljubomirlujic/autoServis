@@ -15,11 +15,12 @@ public abstract class Korisnik extends Osoba {
 
 
 	public Korisnik(int id, String ime, String prezime, String jmbg, Pol pol, String adresa, String brojTelefona,
-			String korisnickoIme, String lozinka) {
-		super(id, ime, prezime, jmbg, pol, adresa, brojTelefona);
+			boolean obrisan, String korisnickoIme, String lozinka) {
+		super(id, ime, prezime, jmbg, pol, adresa, brojTelefona, obrisan);
 		this.korisnickoIme = korisnickoIme;
 		this.lozinka = lozinka;
 	}
+
 
 
 	public String getKorisnickoIme() {
@@ -46,7 +47,9 @@ public abstract class Korisnik extends Osoba {
 	public String toString() {
 		return "Korisnik [korisnickoIme=" + korisnickoIme + ", lozinka=" + lozinka + ", id=" + id + ", ime=" + ime
 				+ ", prezime=" + prezime + ", jmbg=" + jmbg + ", pol=" + pol + ", adresa=" + adresa + ", brojTelefona="
-				+ brojTelefona + "]";
+				+ brojTelefona + ", obrisan=" + obrisan + "]";
 	}
+
+
 	
 }
