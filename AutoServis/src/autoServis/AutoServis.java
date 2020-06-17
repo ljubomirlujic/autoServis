@@ -1,4 +1,4 @@
-package radSaFajlovima;
+package autoServis;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -21,11 +21,12 @@ import osnovneKlase.Administratori;
 import osnovneKlase.Automobili;
 import osnovneKlase.Delovi;
 import osnovneKlase.Musterije;
+import osnovneKlase.Osoba;
 import osnovneKlase.Serviseri;
 import osnovneKlase.Servisi;
 import osnovneKlase.ServisneKnjizice;
 import radSaDatumima.RadSaDatumima;
-public class RadSaFajlovima {
+public class AutoServis {
 	private ArrayList<Administratori> administratori;
 	private ArrayList<Musterije> musterije;
 	private ArrayList<Serviseri> serviseri;
@@ -36,7 +37,7 @@ public class RadSaFajlovima {
 	
 
 //---------------------------Konstruktor----------------------------------//
-	public RadSaFajlovima() {
+	public AutoServis() {
 		administratori = new ArrayList<Administratori>();
 		musterije = new ArrayList<Musterije>();
 		serviseri = new ArrayList<Serviseri>();
@@ -55,7 +56,6 @@ public class RadSaFajlovima {
 	public void obrisiAdministratora(Administratori administrator) {
 		administrator.setObrisan(true);
 		snimiAdministratore();
-		this.administratori.remove(administrator);
 	}
 	public void izmeniAdministratora(int id, String ime, String prezime, String jmbg, Pol pol, String adresa, String brojTelefona,
 			 String korisnickoIme, String lozinka, double plata,boolean obrisan) {
@@ -89,7 +89,6 @@ public class RadSaFajlovima {
 				break;
 			}
 		}
-		this.musterije.remove(musterija);
 	}
 	
 	public void izmeniMusteriju(int id, String ime, String prezime, String jmbg, Pol pol, String adresa, String brojTelefona,
@@ -117,7 +116,6 @@ public class RadSaFajlovima {
 	public void obrisiServisera(Serviseri serviser) {
 		serviser.setObrisan(true);
 		snimiServisere();
-		this.serviseri.remove(serviser);
 	}
 	public void izmeniServisera(int id, String ime, String prezime, String jmbg, Pol pol, String adresa, String brojTelefona,
 			String korisnickoIme, String lozinka, double plata, Specijalizacija specijalizacija,boolean obrisan) {
@@ -152,7 +150,6 @@ public class RadSaFajlovima {
 				break;
 			}
 		}
-		this.automobili.remove(automobil);
 	}
 	public void izmeniAutomobil(int id, Musterije vlasnik, MarkaAutomobila marka, ModelAutomobila model,
 			GregorianCalendar godinaProizvodnje, double zapreminaMotora, int snagaMotora, VrstaGoriva vrstaGoriva,
@@ -178,7 +175,6 @@ public class RadSaFajlovima {
 	public void obrisiKnjizicu(ServisneKnjizice knjizica) {
 		knjizica.setObrisana(true);
 		snimiServisneKnjizice();
-		this.servisneKnjizice.remove(knjizica);
 	}
 	public void izmeniKnjizicu(int id, Automobili automobil, ArrayList<Servisi> servisi, boolean obrisana) {
 		for(ServisneKnjizice knjiga: servisneKnjizice) {
@@ -196,7 +192,6 @@ public class RadSaFajlovima {
 	public void obrisiDeo(Delovi deo) {
 		deo.setObrisan(true);
 		snimiDelove();
-		this.delovi.remove(deo);
 	}
 	public void izmeniDeo(int id, String naziv, double cena, MarkaAutomobila markaAutomobila, ModelAutomobila modelAutomobila,
 			boolean obrisan) {
@@ -216,8 +211,7 @@ public class RadSaFajlovima {
 	}
 	public void obrisiServis(Servisi servis) {
 		servis.setObrisan(true);
-		snimiServise();
-		this.servisi.remove(servis);	
+		snimiServise();	
 	}
 	public void izmeniServis(int id, Automobili automobil, Serviseri serviser, GregorianCalendar termin, String opis,
 			ArrayList<Delovi> delovi, StatusServisa status, boolean obrisan) {
@@ -232,6 +226,34 @@ public class RadSaFajlovima {
 				s.setObrisan(obrisan);
 			}
 		}
+	}
+	public Musterije prijavaMusterija(String korisnickoIme, String lozinka) {
+		for(Musterije musterija : musterije) {
+			if(musterija.getKorisnickoIme().equalsIgnoreCase(korisnickoIme) &&
+					musterija.getLozinka().equals(lozinka) && !musterija.isObrisan()) {
+				return musterija;
+			}
+		
+		}
+		return null;
+	}
+	public Serviseri prijavaServiser(String korisnickoIme, String lozinka) {
+		for(Serviseri serv : serviseri) {
+			if(serv.getKorisnickoIme().equalsIgnoreCase(korisnickoIme) &&
+					serv.getLozinka().equals(lozinka) && !serv.isObrisan()) {
+				return serv;
+			}
+		}
+		return null;
+	}
+	public Administratori prijavaAdmin(String korisnickoIme, String lozinka) {
+		for(Administratori admin : administratori) {
+			if(admin.getKorisnickoIme().equalsIgnoreCase(korisnickoIme) &&
+					admin.getLozinka().equals(lozinka) && !admin.isObrisan()) {
+				return admin;
+			}
+		}
+		return null;
 	}
 	
 	public  Musterije odrediVlasnika(String vlasnik) {
@@ -272,6 +294,16 @@ public class RadSaFajlovima {
 		
 		return null;
 	}
+	public Servisi pronadjiServis(String id) {
+		for (Servisi servis : servisi) {
+			if(servis.getId() == Integer.parseInt(id)) {
+				return servis;
+				
+			}
+		}
+		
+		return null;
+	}
 	public Delovi nadjiDeo(String id) {
 		for (Delovi deo : delovi) {
 			if(deo.getId() == Integer.parseInt(id)) {
@@ -282,7 +314,7 @@ public class RadSaFajlovima {
 	}
 	public Automobili nadjiAutoPrekoKnjizice(String id) {
 		for (ServisneKnjizice knjiga : servisneKnjizice) {
-			if(knjiga.getAutomobil().getId() == Integer.parseInt(id)) {
+			if(knjiga.getId() == Integer.parseInt(id)) {
 				return knjiga.getAutomobil();
 			}
 		}
@@ -296,6 +328,19 @@ public class RadSaFajlovima {
 			}
 			else {
 				sadrzaj += delovi.get(i).getId();
+			}
+		}
+		return sadrzaj;
+	}
+
+	public String deloviUStringNaziv(ArrayList<Delovi> delovi) {
+		String sadrzaj = "";
+		for(int i = 0;i<delovi.size();i++) {
+			if(i != delovi.size() -1) {
+				sadrzaj += delovi.get(i).getNaziv() + ",";
+			}
+			else {
+				sadrzaj += delovi.get(i).getNaziv();
 			}
 		}
 		return sadrzaj;
@@ -577,24 +622,34 @@ public class RadSaFajlovima {
 			String line;
 			while((line = reader.readLine()) != null) {
 				String[] linija = line.split("\\|"); 
-				int id = Integer.parseInt(linija[0]);
-				Automobili automobil = nadjiAutoPrekoKnjizice(linija[1]);
-				Serviseri serviser = pronadjiServisera(linija[2]);
-				GregorianCalendar termin = RadSaDatumima.stringUDatum(linija[3]);
-				String opis = linija[4];
-				String delovi = linija[5];
-				String[] deloviSPlit = delovi.split(";");
-				ArrayList<Delovi> deo = new ArrayList<Delovi>();
-				for (String sif : deloviSPlit) {
-					Delovi k = nadjiDeo(sif);
-					if(k != null) {
-						deo.add(k);
+				if(linija[2].equals("null")) {
+					Automobili automobil = nadjiAutoPrekoKnjizice(linija[1]);
+					int id = Integer.parseInt(linija[0]);
+					String opis = linija[4];
+					Servisi servis = new Servisi(id,automobil, opis);
+					servisi.add(servis);
+				}
+				else {
+					int id = Integer.parseInt(linija[0]);
+					Automobili automobil = nadjiAutoPrekoKnjizice(linija[1]);
+					Serviseri serviser = pronadjiServisera(linija[2]);
+					GregorianCalendar termin = RadSaDatumima.stringUDatum(linija[3]);
+					String opis = linija[4];
+					String delovi = linija[5];
+					String[] deloviSPlit = delovi.split(";");
+					ArrayList<Delovi> deo = new ArrayList<Delovi>();
+					for (String sif : deloviSPlit) {
+						Delovi k = nadjiDeo(sif);
+						if(k != null) {
+							deo.add(k);
+						}
 					}
-			}
-				StatusServisa status = StatusServisa.valueOf(linija[6].toUpperCase());
-				boolean obrisan = Boolean.parseBoolean(linija[7]);
-				Servisi servis = new Servisi(id, automobil, serviser, termin, opis, deo, status,obrisan);
-				servisi.add(servis);
+					StatusServisa status = StatusServisa.valueOf(linija[6].toUpperCase());
+					double cena = Double.parseDouble(linija[7]);
+					boolean obrisan = Boolean.parseBoolean(linija[8]);
+					Servisi servis = new Servisi(id, automobil, serviser, termin, opis, deo, status,cena,obrisan);
+					servisi.add(servis);
+				}
 			}
 			reader.close();
 		} catch (IOException e) {
@@ -607,9 +662,16 @@ public class RadSaFajlovima {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(korisniciFile));
 			String sadrzaj = "";
 			for(Servisi servis:this.servisi) {
+				if(servis.getServiser() != null) {
 				sadrzaj += servis.getId() + "|" +  servis.getAutomobil().getId() + "|" +  servis.getServiser().getId() + "|" + 
 						RadSaDatumima.datumUString(servis.getTermin())  + "|" + servis.getOpis() + "|" + deloviUString(servis.getDelovi()) + "|" +
-						servis.getStatus() + "|" +  servis.isObrisan() + "\n"; 
+						servis.getStatus() + "|" + servis.getCena() + "|" +  servis.isObrisan() + "\n"; 
+				}
+				else {
+					sadrzaj += servis.getId() + "|" +  servis.getAutomobil().getId() + "|" +  servis.getServiser() + "|" + 
+							servis.getTermin()  + "|" + servis.getOpis() + "|" + servis.getDelovi() + "|" +
+							servis.getStatus() + "|" + servis.getCena() + "|" +  servis.isObrisan() + "\n"; 
+				}
 			}
 			writer.write(sadrzaj);
 			writer.close();

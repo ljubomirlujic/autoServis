@@ -1,0 +1,5 @@
+0|0|1|12.02.2020|bice bolje|0|OTKAZAN|200.0|false
+2|0|null|null|sad|null|ZAKAZAN|0.0|false
+3|0|null|null|pukao remen|null|ZAKAZAN|0.0|false
+4|0|0|12.02.2020|opet remen|0|ZAKAZAN|200.0|true
+5|4|0|12.02.2020|opet remen|0;1|ZAKAZAN|500.0|false

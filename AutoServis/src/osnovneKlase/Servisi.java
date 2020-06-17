@@ -14,6 +14,7 @@ public class Servisi {
 	private String opis;
 	private ArrayList<Delovi> delovi;
 	private StatusServisa status;
+	private double cena;
 	private boolean obrisan;
 	
 	public Servisi() {
@@ -24,11 +25,13 @@ public class Servisi {
 		this.opis = "";
 		this.delovi = new ArrayList<Delovi>();
 		this.status = StatusServisa.ZAKAZAN;
+		this.cena = 0;
 		this.obrisan = false;
 	}
+	
 
 	public Servisi(int id, Automobili automobil, Serviseri serviser, GregorianCalendar termin, String opis,
-			ArrayList<Delovi> delovi, StatusServisa status, boolean obrisan) {
+			ArrayList<Delovi> delovi, StatusServisa status,double cena, boolean obrisan) {
 		super();
 		this.id = id;
 		this.automobil = automobil;
@@ -37,9 +40,22 @@ public class Servisi {
 		this.opis = opis;
 		this.delovi = delovi;
 		this.status = status;
+		this.cena = cena;
 		this.obrisan = obrisan;
 	}
-
+	
+	public Servisi(int id,Automobili automobil,String opis) {
+		super();
+		this.id = id;
+		this.automobil = automobil;
+		this.serviser = null;
+		this.termin = null;
+		this.opis = opis;
+		this.delovi = null;
+		this.status = StatusServisa.ZAKAZAN;
+		this.cena = 0;
+		this.obrisan = false;
+	}
 
 
 	public int getId() {
@@ -106,11 +122,20 @@ public class Servisi {
 	public void setObrisan(boolean obrisan) {
 		this.obrisan = obrisan;
 	}
+	
+
+	public double getCena() {
+		return cena;
+	}
+
+	public void setCena(double cena) {
+		this.cena = cena;
+	}
 
 	@Override
 	public String toString() {
-		return "Servis [id=" + id + ", automobil=" + automobil + ", serviser=" + serviser + ", termin=" + RadSaDatumima.datumUString(termin)
-				+ ", opis=" + opis + ", delovi=" + delovi + ", status=" + status + ", obrisan=" + obrisan + "]";
+		return "Servis [id=" + id + ", automobil=" + automobil + ", serviser=" + serviser + ", termin=" + termin
+				+ ", opis=" + opis + ", delovi=" + delovi + ", status=" + status + ", cena=" + cena + ", obrisan=" + obrisan + "]";
 	}
 
 	
